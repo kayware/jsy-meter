@@ -4,9 +4,9 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/modbus/modbus.h"
 
-#define SENSOR_SETTER(name) void set_ ## name ## _sensor(sensor_t *s) { this-> ## name ## _sensor_ = s; }
+#define SENSOR_SETTER(name) void set_ ## name ## _sensor(sensor_t *s) { this-> name ## _sensor_ = s; }
 #define PHASE_SENSOR_SETTER(name) void set_phase_ ## name ## _sensor(uint8_t ph, sensor_t *s)\
-        { this->phases_[ph]. ## name ## _sensor_ = s; }
+        { this->phases_[ph]. name ## _sensor_ = s; }
 #define SENSOR(name) sensor_t *name ## _sensor_ { nullptr }
 
 namespace esphome {
@@ -47,6 +47,9 @@ protected:
     0x01, 0x00,         /* Start address: 0x0100 */
     0x00, 0x44,         /* Read 0x44 registers */
   };
+
+  void JSYMeter::parse_registers(const std::vector<uint8_t> &data);
+  void JSYMeter::log_error(const std::vector<uint8_t> &data);
 
   SENSOR(total_active_power);
   SENSOR(total_forward_active_energy);
