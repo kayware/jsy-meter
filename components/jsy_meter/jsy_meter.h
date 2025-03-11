@@ -48,8 +48,8 @@ protected:
     0x00, 0x44,         /* Read 0x44 registers */
   };
 
-  void JSYMeter::parse_registers(const std::vector<uint8_t> &data);
-  void JSYMeter::log_error(const std::vector<uint8_t> &data);
+  void parse_registers(const std::vector<uint8_t> &data);
+  void log_error(const std::vector<uint8_t> &data);
 
   SENSOR(total_active_power);
   SENSOR(total_forward_active_energy);
