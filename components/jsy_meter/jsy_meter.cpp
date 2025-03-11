@@ -78,11 +78,11 @@ void JSYMeter::parse_registers(const std::vector<uint8_t> &data) {
 
   for (uint16_t i = 0; i < 3; i++) {
     float direction = (power_direction & (1 << i)) ? -1 : 1;
-    update_sensor(this->phases_[i].voltage_, read_regU16(i, UNIT_TWO_DEC));
-    update_sensor(this->phases_[i].current_, read_regU16(i + 3, UNIT_TWO_DEC));
-    update_sensor(this->phases_[i].active_power_, read_regU16(i + 6, UNIT_NO_DEC) * direction);
-    update_sensor(this->phases_[i].forward_active_energy_, read_regU32(i*2 + 0x34, UNIT_TWO_DEC));
-    update_sensor(this->phases_[i].backward_active_energy_, read_regU32(i*2 + 0x3c, UNIT_TWO_DEC));
+    update_sensor(this->phases_[i].voltage_sensor_, read_regU16(i, UNIT_TWO_DEC));
+    update_sensor(this->phases_[i].current_sensor_, read_regU16(i + 3, UNIT_TWO_DEC));
+    update_sensor(this->phases_[i].active_power_sensor_, read_regU16(i + 6, UNIT_NO_DEC) * direction);
+    update_sensor(this->phases_[i].forward_active_energy_sensor_, read_regU32(i*2 + 0x34, UNIT_TWO_DEC));
+    update_sensor(this->phases_[i].backward_active_energy_sensor_, read_regU32(i*2 + 0x3c, UNIT_TWO_DEC));
   }
 
   float direction = (power_direction & (1 << 3)) ? -1 : 1;
